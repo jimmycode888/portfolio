@@ -4,18 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jimmy Liu — Social Data Science student, software engineering intern, and data-focused technology portfolio.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f8fa">
   <title>Jimmy Liu | Social Data Science & Technology</title>
+  <script>
+    /* Resolve the theme before first paint so there is no flash of the wrong palette.
+       An explicit choice in localStorage always wins; otherwise follow the OS. */
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var theme = (saved === 'dark' || saved === 'light')
+          ? saved
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) { /* storage blocked — fall through to the light palette */ }
+    })();
+  </script>
   <style>
     :root {
       --bg: #f7f8fa;
       --surface: #ffffff;
       --text: #17202a;
+      --body: #475467;
       --muted: #667085;
       --line: #e5e7eb;
       --accent: #1f5eff;
       --accent-soft: #edf3ff;
+      --accent-text: #244b9b;
+      --accent-line: #dbe6ff;
+      --nav-bg: rgba(247, 248, 250, .92);
+      --nav-line: rgba(229, 231, 235, .85);
+      --btn-primary-bg: #17202a;
+      --btn-primary-fg: #ffffff;
+      --inverse-bg: #17202a;
+      --inverse-fg: #ffffff;
+      --inverse-muted: #cbd5e1;
+      --inverse-line: #475467;
+      --inverse-eyebrow: #9db9ff;
+      --shadow: 0 8px 30px rgba(16, 24, 40, .04);
+      --shadow-hover: 0 14px 36px rgba(16, 24, 40, .08);
+      --glow-strong: rgba(31, 94, 255, .12);
+      --glow-soft: rgba(31, 94, 255, .07);
+      --focus: rgba(31, 94, 255, .35);
       --max: 1120px;
       --radius: 18px;
+      color-scheme: light;
+    }
+
+    /* Dark palette — no-JS fallback, and the explicit user choice. */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0f1319;
+        --surface: #171d26;
+        --text: #e9eef6;
+        --body: #b3c0d1;
+        --muted: #8c9aad;
+        --line: #2a323e;
+        --accent: #7aa2ff;
+        --accent-soft: #1a2540;
+        --accent-text: #a9c3ff;
+        --accent-line: #2c3f66;
+        --nav-bg: rgba(15, 19, 25, .9);
+        --nav-line: rgba(42, 50, 62, .85);
+        --btn-primary-bg: #e9eef6;
+        --btn-primary-fg: #0f1319;
+        --inverse-bg: #1b222c;
+        --inverse-fg: #e9eef6;
+        --inverse-muted: #a3b1c2;
+        --inverse-line: #39434f;
+        --inverse-eyebrow: #7aa2ff;
+        --shadow: 0 8px 30px rgba(0, 0, 0, .35);
+        --shadow-hover: 0 14px 36px rgba(0, 0, 0, .5);
+        --glow-strong: rgba(122, 162, 255, .15);
+        --glow-soft: rgba(122, 162, 255, .08);
+        --focus: rgba(122, 162, 255, .45);
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0f1319;
+      --surface: #171d26;
+      --text: #e9eef6;
+      --body: #b3c0d1;
+      --muted: #8c9aad;
+      --line: #2a323e;
+      --accent: #7aa2ff;
+      --accent-soft: #1a2540;
+      --accent-text: #a9c3ff;
+      --accent-line: #2c3f66;
+      --nav-bg: rgba(15, 19, 25, .9);
+      --nav-line: rgba(42, 50, 62, .85);
+      --btn-primary-bg: #e9eef6;
+      --btn-primary-fg: #0f1319;
+      --inverse-bg: #1b222c;
+      --inverse-fg: #e9eef6;
+      --inverse-muted: #a3b1c2;
+      --inverse-line: #39434f;
+      --inverse-eyebrow: #7aa2ff;
+      --shadow: 0 8px 30px rgba(0, 0, 0, .35);
+      --shadow-hover: 0 14px 36px rgba(0, 0, 0, .5);
+      --glow-strong: rgba(122, 162, 255, .15);
+      --glow-soft: rgba(122, 162, 255, .08);
+      --focus: rgba(122, 162, 255, .45);
+      color-scheme: dark;
     }
 
     * { box-sizing: border-box; }
@@ -26,10 +117,11 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.65;
+      transition: background-color .25s ease, color .25s ease;
     }
     a { color: inherit; text-decoration: none; }
     a:focus-visible, button:focus-visible {
-      outline: 3px solid rgba(31, 94, 255, .35);
+      outline: 3px solid var(--focus);
       outline-offset: 3px;
     }
 
@@ -42,9 +134,10 @@
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(247, 248, 250, .92);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(229, 231, 235, .85);
+      border-bottom: 1px solid var(--nav-line);
+      transition: background-color .25s ease, border-color .25s ease;
     }
     .nav-inner {
       min-height: 68px;
@@ -57,20 +150,50 @@
       font-weight: 800;
       letter-spacing: -.02em;
     }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
     .nav-links {
       display: flex;
       gap: 22px;
       flex-wrap: wrap;
-      color: #475467;
+      color: var(--body);
       font-size: .93rem;
     }
     .nav-links a:hover { color: var(--accent); }
 
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      flex: 0 0 auto;
+      transition: background-color .25s ease, border-color .2s ease, color .2s ease;
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .theme-toggle svg { width: 17px; height: 17px; display: block; }
+    .theme-toggle .icon-moon { display: none; }
+    .theme-toggle[data-resolved="dark"] .icon-sun { display: none; }
+    .theme-toggle[data-resolved="dark"] .icon-moon { display: block; }
+
     .hero {
       padding: 100px 0 80px;
       background:
-        radial-gradient(circle at 85% 15%, rgba(31,94,255,.12), transparent 30%),
-        radial-gradient(circle at 10% 20%, rgba(31,94,255,.07), transparent 28%);
+        radial-gradient(circle at 85% 15%, var(--glow-strong), transparent 30%),
+        radial-gradient(circle at 10% 20%, var(--glow-soft), transparent 28%);
     }
     .eyebrow {
       color: var(--accent);
@@ -99,21 +222,31 @@
       flex-wrap: wrap;
     }
     .button {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 11px 17px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--surface);
       font-weight: 700;
       font-size: .92rem;
+      transition: background-color .25s ease, border-color .2s ease, color .2s ease;
     }
+    .button:hover { border-color: var(--accent); color: var(--accent); }
     .button.primary {
-      background: var(--text);
-      color: #fff;
-      border-color: var(--text);
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-fg);
+      border-color: var(--btn-primary-bg);
     }
+    .button.primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--btn-primary-fg);
+    }
+    .btn-icon { width: 15px; height: 15px; flex: 0 0 auto; }
 
-    section { padding: 76px 0; }
+    section { padding: 76px 0; scroll-margin-top: 84px; }
     .section-head {
       margin-bottom: 30px;
       max-width: 760px;
@@ -138,12 +271,13 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 26px;
-      box-shadow: 0 8px 30px rgba(16, 24, 40, .04);
-      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease,
+                  background-color .25s ease, border-color .25s ease;
     }
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(16, 24, 40, .08);
+      box-shadow: var(--shadow-hover);
     }
     .card h3 { margin: 0 0 7px; font-size: 1.1rem; }
     .meta {
@@ -151,9 +285,9 @@
       font-size: .9rem;
       margin-bottom: 14px;
     }
-    .card p { margin: 0; color: #475467; }
+    .card p { margin: 0; color: var(--body); }
     ul { margin: 14px 0 0; padding-left: 20px; }
-    li { margin: 7px 0; color: #475467; }
+    li { margin: 7px 0; color: var(--body); }
 
     .skills {
       display: flex;
@@ -163,12 +297,13 @@
     }
     .tag {
       background: var(--accent-soft);
-      color: #244b9b;
-      border: 1px solid #dbe6ff;
+      color: var(--accent-text);
+      border: 1px solid var(--accent-line);
       padding: 7px 11px;
       border-radius: 999px;
       font-size: .85rem;
       font-weight: 700;
+      transition: background-color .25s ease, border-color .25s ease, color .25s ease;
     }
 
     .timeline {
@@ -188,12 +323,14 @@
     .org { color: var(--accent); font-weight: 700; margin: 3px 0 12px; }
 
     .contact {
-      background: var(--text);
-      color: #fff;
+      background: var(--inverse-bg);
+      color: var(--inverse-fg);
       border-radius: 26px;
       padding: 48px;
+      transition: background-color .25s ease, color .25s ease;
     }
-    .contact p { color: #cbd5e1; max-width: 680px; }
+    .contact .eyebrow { color: var(--inverse-eyebrow); }
+    .contact p { color: var(--inverse-muted); max-width: 680px; }
     .contact-links {
       display: flex;
       flex-wrap: wrap;
@@ -201,10 +338,15 @@
       margin-top: 24px;
     }
     .contact-links a {
-      border: 1px solid #475467;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--inverse-line);
       padding: 10px 14px;
       border-radius: 999px;
+      transition: border-color .2s ease, color .2s ease;
     }
+    .contact-links a:hover { border-color: var(--inverse-eyebrow); color: var(--inverse-eyebrow); }
 
     footer {
       padding: 30px 0 50px;
@@ -215,6 +357,7 @@
 
     @media (max-width: 800px) {
       .nav-inner { align-items: flex-start; padding: 16px 0; flex-direction: column; }
+      .nav-right { gap: 14px; }
       .hero { padding: 70px 0 60px; }
       .two, .three { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
@@ -224,6 +367,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .card { transition: none; }
+      body, nav, .button, .tag, .contact { transition: none; }
     }
   </style>
 </head>
@@ -232,15 +376,26 @@
   <nav aria-label="Main navigation">
     <div class="container nav-inner">
       <a class="brand" href="#top">LIU Jia Ming</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#ambassador">Ambassador</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#education">Education</a>
-        <a href="#exchange">Exchange</a>
-        <a href="#contact">Contact</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#ambassador">Ambassador</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#exchange">Exchange</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2"/>
+            <path d="M12 2.6v2.2M12 19.2v2.2M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.4 19.6l1.6-1.6M18 6l1.6-1.6"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.6 14.7A8.7 8.7 0 1 1 9.3 3.4a7.1 7.1 0 0 0 11.3 11.3Z"/>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -256,7 +411,15 @@
           UI/UX prototyping, and Generative AI.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#projects">View Projects</a>
+          <a class="button primary" href="assets/Jimmy_Liu_CV.pdf" download="Jimmy_Liu_CV.pdf">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3.4v11"/>
+              <path d="m7.6 10.4 4.4 4.4 4.4-4.4"/>
+              <path d="M4.6 20.6h14.8"/>
+            </svg>
+            Download CV
+          </a>
+          <a class="button" href="#projects">View Projects</a>
           <a class="button" href="mailto:j8514190@gmail.com">Contact Me</a>
         </div>
       </div>
@@ -470,7 +633,7 @@
     <section id="contact">
       <div class="container">
         <div class="contact">
-          <div class="eyebrow" style="color:#9db9ff;">Contact</div>
+          <div class="eyebrow">Contact</div>
           <h2>Let's connect.</h2>
           <p>
             For internship, project, or technology-related opportunities, please use the contact details below.
@@ -478,6 +641,14 @@
           <div class="contact-links">
             <a href="mailto:j8514190@gmail.com">j8514190@gmail.com</a>
             <a href="tel:+85244062199">+852 4406 2199</a>
+            <a href="assets/Jimmy_Liu_CV.pdf" download="Jimmy_Liu_CV.pdf">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3.4v11"/>
+                <path d="m7.6 10.4 4.4 4.4 4.4-4.4"/>
+                <path d="M4.6 20.6h14.8"/>
+              </svg>
+              Download CV
+            </a>
           </div>
         </div>
       </div>
@@ -487,5 +658,53 @@
   <footer>
     <div class="container">© 2026 Jimmy Liu. Built as a single HTML/CSS portfolio page.</div>
   </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      if (!btn) return;
+
+      var mq = window.matchMedia('(prefers-color-scheme: dark)');
+      var meta = document.querySelector('meta[name="theme-color"]');
+
+      function stored() {
+        try {
+          var v = localStorage.getItem('theme');
+          return (v === 'dark' || v === 'light') ? v : null;
+        } catch (e) { return null; }
+      }
+      function current() {
+        var t = root.getAttribute('data-theme');
+        if (t === 'dark' || t === 'light') return t;
+        return mq.matches ? 'dark' : 'light';
+      }
+      function paint() {
+        var t = current();
+        btn.setAttribute('data-resolved', t);
+        var label = t === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+        btn.setAttribute('aria-label', label);
+        btn.setAttribute('title', label);
+        if (meta) meta.setAttribute('content', t === 'dark' ? '#0f1319' : '#f7f8fa');
+      }
+
+      btn.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
+        paint();
+      });
+
+      /* Keep following the OS while the visitor has not chosen explicitly. */
+      function onSystemChange() {
+        if (!stored()) root.setAttribute('data-theme', mq.matches ? 'dark' : 'light');
+        paint();
+      }
+      if (mq.addEventListener) mq.addEventListener('change', onSystemChange);
+      else if (mq.addListener) mq.addListener(onSystemChange);
+
+      paint();
+    })();
+  </script>
 </body>
 </html>
