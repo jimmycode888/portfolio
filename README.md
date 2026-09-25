@@ -8,8 +8,31 @@ Personal portfolio / resume site. Single-page, dependency-free HTML + CSS.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The entire site (markup + inline CSS, no build step) |
+| `index.html` | The entire site (markup + inline CSS + a little vanilla JS, no build step) |
+| `assets/Jimmy_Liu_CV.pdf` | The CV served by the Download CV buttons |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is, skipping Jekyll processing |
+
+## Theme
+
+Light and dark palettes are defined once as CSS custom properties on `:root`, so every
+colour in the stylesheet resolves through a variable — there are no hardcoded colours in
+component rules.
+
+- On first visit the theme follows the operating system (`prefers-color-scheme`).
+- Clicking the nav toggle stores an explicit choice in `localStorage` under `theme`,
+  which then wins over the OS.
+- A small inline script in `<head>` resolves the theme *before* first paint, so there is
+  no flash of the wrong palette.
+- The toggle swaps its sun/moon icon and keeps `aria-label` / `title` / `theme-color`
+  in sync.
+
+To force a palette for testing, set `data-theme="dark"` or `data-theme="light"` on the
+`<html>` element.
+
+## Updating the CV
+
+The Download CV buttons point at `assets/Jimmy_Liu_CV.pdf`. Replace that file with a new
+export and push — the buttons pick it up automatically.
 
 ## Sections
 
