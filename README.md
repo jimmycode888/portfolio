@@ -13,7 +13,7 @@ Personal portfolio / resume site. Single-page, dependency-free HTML + CSS.
 
 ## Sections
 
-About · Experience · Selected Projects · Skills & Passions · Education & Certifications · Exchange Experience · Contact
+About · Experience · Trade Ambassador Programme · Selected Projects · Skills & Passions · Education & Certifications · Exchange Experience · Contact
 
 ## Local preview
 
