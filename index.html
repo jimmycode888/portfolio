@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jimmy Liu — Social Data Science student, software engineering intern, and data-focused technology portfolio.">
+  <title>Jimmy Liu | Social Data Science & Technology</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #17202a;
+      --muted: #667085;
+      --line: #e5e7eb;
+      --accent: #1f5eff;
+      --accent-soft: #edf3ff;
+      --max: 1120px;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid rgba(31, 94, 255, .35);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247, 248, 250, .92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, .85);
+    }
+    .nav-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      color: #475467;
+      font-size: .93rem;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      padding: 100px 0 80px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(31,94,255,.12), transparent 30%),
+        radial-gradient(circle at 10% 20%, rgba(31,94,255,.07), transparent 28%);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+    h1 {
+      max-width: 850px;
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+      margin: 14px 0 24px;
+    }
+    .hero p {
+      max-width: 760px;
+      font-size: 1.12rem;
+      color: var(--muted);
+      margin: 0;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .button {
+      display: inline-block;
+      padding: 11px 17px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-weight: 700;
+      font-size: .92rem;
+    }
+    .button.primary {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    section { padding: 76px 0; }
+    .section-head {
+      margin-bottom: 30px;
+      max-width: 760px;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.15;
+      letter-spacing: -.035em;
+      margin: 0 0 10px;
+    }
+    .section-head p { color: var(--muted); margin: 0; }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: 0 8px 30px rgba(16, 24, 40, .04);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(16, 24, 40, .08);
+    }
+    .card h3 { margin: 0 0 7px; font-size: 1.1rem; }
+    .meta {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 14px;
+    }
+    .card p { margin: 0; color: #475467; }
+    ul { margin: 14px 0 0; padding-left: 20px; }
+    li { margin: 7px 0; color: #475467; }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .tag {
+      background: var(--accent-soft);
+      color: #244b9b;
+      border: 1px solid #dbe6ff;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 26px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+    }
+    .timeline-item:first-child { border-top: 0; padding-top: 0; }
+    .date { color: var(--muted); font-size: .9rem; }
+    .role { font-weight: 800; font-size: 1.12rem; }
+    .org { color: var(--accent); font-weight: 700; margin: 3px 0 12px; }
+
+    .contact {
+      background: var(--text);
+      color: #fff;
+      border-radius: 26px;
+      padding: 48px;
+    }
+    .contact p { color: #cbd5e1; max-width: 680px; }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .contact-links a {
+      border: 1px solid #475467;
+      padding: 10px 14px;
+      border-radius: 999px;
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--muted);
+      font-size: .85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .nav-inner { align-items: flex-start; padding: 16px 0; flex-direction: column; }
+      .hero { padding: 70px 0 60px; }
+      .two, .three { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+      .contact { padding: 32px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .card { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">LIU Jia Ming</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="container">
+        <div class="eyebrow">Social Data Science · Software · Data</div>
+        <h1>Jimmy Liu</h1>
+        <p>
+          Bachelor of Social Data Science (Economics and Data Science) student at Lingnan University,
+          with experience spanning software engineering, data analysis, SQL databases, Java applications,
+          UI/UX prototyping, and Generative AI.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">View Projects</a>
+          <a class="button" href="mailto:j8514190@gmail.com">Contact Me</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>About</h2>
+          <p>
+            A technology-focused student combining software development and data skills with an academic
+            foundation in economics and data science.
+          </p>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>Focus</h3>
+            <p>
+              Software engineering, data processing, relational databases, data visualization,
+              statistical analysis, and Generative AI.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Languages</h3>
+            <p>Fluent in English and Mandarin; basic Cantonese.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <h2>Experience</h2>
+          <p>Professional and applied experience documented in the CV.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="date">Jun 2025 – Aug 2025</div>
+            <div>
+              <div class="role">Software Engineer Intern</div>
+              <div class="org">Shenzhen Sanke Cloud Technology Investment Co., Ltd. · Shenzhen</div>
+              <ul>
+                <li>Developed and maintained backend modules for cloud-based investment systems using C++, following industrial coding standards and agile SDLC.</li>
+                <li>Optimized data processing pipelines with advanced data structures and algorithms, improving query efficiency for large-scale financial datasets by approximately 15%.</li>
+                <li>Conducted performance tuning and debugging, using logging metrics to identify bottlenecks and support data-driven optimization.</li>
+                <li>Used Python and pandas for ad-hoc data validation and integration testing.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Selected Projects</h2>
+          <p>Academic projects demonstrating software, database, analytics, and interface design capabilities.</p>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>Hotel Management System</h3>
+            <div class="meta">SQL Database Project · HKCC · Mar 2025 – May 2025</div>
+            <p>Designed and implemented a MySQL relational database for hotel operations, using joins, aggregations, and stored procedures to track occupancy, customer history, and revenue trends. Results were visualized in Excel.</p>
+            <div class="skills"><span class="tag">MySQL</span><span class="tag">SQL</span><span class="tag">Excel</span></div>
+          </article>
+
+          <article class="card">
+            <h3>Banking Application</h3>
+            <div class="meta">Java GUI · HKCC · Sep 2025 – Nov 2025</div>
+            <p>Built a Java Swing desktop application with virtual fund transfer, cash withdrawal, real-time balance synchronization, input validation, and transaction history logging.</p>
+            <div class="skills"><span class="tag">Java</span><span class="tag">Java Swing</span><span class="tag">Validation</span></div>
+          </article>
+
+          <article class="card">
+            <h3>Food Delivery App Prototype</h3>
+            <div class="meta">Axure RP · HKCC · Sep 2025 – Nov 2025</div>
+            <p>Designed a high-fidelity interactive prototype covering restaurant browsing, menu selection, order placement, and real-time delivery tracking with dynamic panels and conditional logic.</p>
+            <div class="skills"><span class="tag">UI/UX</span><span class="tag">Axure RP</span><span class="tag">Prototyping</span></div>
+          </article>
+
+          <article class="card">
+            <h3>Theme Park Visitor Behavior Analytics</h3>
+            <div class="meta">HKCC · Sep 2025 – Dec 2025</div>
+            <p>Analyzed 1,056 visitor responses using Chi-square tests and multiple regression in Excel/SPSS to identify payment behavior patterns and predict willingness-to-pay.</p>
+            <div class="skills"><span class="tag">Statistics</span><span class="tag">SPSS</span><span class="tag">Regression</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <h2>Skills & Passions</h2>
+          <p>Technical capabilities and interests listed in the CV.</p>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>Technical Skills</h3>
+            <div class="skills">
+              <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Java</span>
+              <span class="tag">C++</span><span class="tag">Pivot Table</span>
+              <span class="tag">Generative AI</span><span class="tag">Git control</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>Interests</h3>
+            <div class="skills">
+              <span class="tag">AI</span><span class="tag">Driving</span><span class="tag">Badminton</span><span class="tag">GYM</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-head">
+          <h2>Education & Certifications</h2>
+        </div>
+        <div class="grid two">
+          <article class="card">
+            <h3>Lingnan University</h3>
+            <div class="meta">Sep 2026 – Jun 2028</div>
+            <p>Bachelor of Social Data Science (Economics and Data Science)</p>
+          </article>
+          <article class="card">
+            <h3>Hong Kong Polytechnic University, Hong Kong Community College</h3>
+            <div class="meta">Sep 2024 – Jun 2026</div>
+            <p>Associate in Information Technology (IT). Graduated With Distinction.</p>
+          </article>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <h3>Certifications</h3>
+          <div class="grid two" style="margin-top:18px;">
+            <div>
+              <ul>
+                <li>Python Data Structures — 2026</li>
+                <li>C++ — 2024</li>
+                <li>Java — 2025</li>
+                <li>SQL — 2026</li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>Data Visualization (Tableau, Matplotlib) — 2026</li>
+                <li>Spreadsheets (Excel) — 2025</li>
+                <li>Statistics — 2025</li>
+                <li>Generative AI: Prompt Engineering Basics — 2026</li>
+              </ul>
+            </div>
+          </div>
+          <p class="meta" style="margin-top:18px;">
+            Certifications are listed in the CV as being certified by the Google Data Analytics Professional Certificate and/or PolyU Hong Kong Community College, as specified for each item.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="exchange">
+      <div class="container">
+        <div class="section-head">
+          <h2>Exchange Experience</h2>
+        </div>
+        <article class="card">
+          <h3>The 20th Shenzhen International Finance Expo 2026</h3>
+          <div class="meta">Student Representative / Participant · Shenzhen · May 2026</div>
+          <p>
+            Participated in the 20th Shenzhen International Finance Expo, exploring FinTech innovations
+            including AI-driven finance and cross-border payment systems with 300+ exhibitors.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact">
+          <div class="eyebrow" style="color:#9db9ff;">Contact</div>
+          <h2>Let's connect.</h2>
+          <p>
+            For internship, project, or technology-related opportunities, please use the contact details below.
+          </p>
+          <div class="contact-links">
+            <a href="mailto:j8514190@gmail.com">j8514190@gmail.com</a>
+            <a href="tel:+85244062199">+852 4406 2199</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Jimmy Liu. Built as a single HTML/CSS portfolio page.</div>
+  </footer>
+</body>
+</html>
