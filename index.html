@@ -201,7 +201,7 @@
     .theme-toggle[data-resolved="dark"] .icon-moon { display: block; }
 
     .hero {
-      padding: 100px 0 80px;
+      padding: 96px 0 66px;
       background:
         radial-gradient(circle at 85% 15%, var(--glow-strong), transparent 30%),
         radial-gradient(circle at 10% 20%, var(--glow-soft), transparent 28%);
@@ -256,6 +256,38 @@
       color: var(--btn-primary-fg);
     }
     .btn-icon { width: 15px; height: 15px; flex: 0 0 auto; }
+
+    /* Credibility strip under the hero CTAs: the three activities that are
+       currently active, so a reader sees them without scrolling. */
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 38px;
+      max-width: 840px;
+    }
+    .hero-fact {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      transition: background-color .25s ease, border-color .2s ease;
+    }
+    .hero-fact .fact-k {
+      display: block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 5px;
+    }
+    .hero-fact .fact-v {
+      display: block;
+      font-size: .9rem;
+      line-height: 1.45;
+      color: var(--body);
+    }
 
     section { padding: 76px 0; scroll-margin-top: 84px; }
     .section-head {
@@ -370,6 +402,7 @@
       .nav-inner { align-items: flex-start; padding: 16px 0; flex-direction: column; }
       .nav-right { gap: 14px; }
       .hero { padding: 70px 0 60px; }
+      .hero-facts { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
       .two, .three { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .contact { padding: 32px 24px; }
@@ -432,6 +465,20 @@
           </a>
           <a class="button" href="#projects">View Projects</a>
           <a class="button" href="mailto:j8514190@gmail.com">Contact Me</a>
+        </div>
+        <div class="hero-facts">
+          <div class="hero-fact">
+            <span class="fact-k">Trade Ambassador</span>
+            <span class="fact-v">HKTDC Trade Ambassador Programme, 2026/27 Cohort</span>
+          </div>
+          <div class="hero-fact">
+            <span class="fact-k">Factor Research</span>
+            <span class="fact-v">PandaAI 4th Factor Competition — submitted and backtested</span>
+          </div>
+          <div class="hero-fact">
+            <span class="fact-k">Hackathon for the SDGs</span>
+            <span class="fact-v">Inter-university hackathon, HKU &times; eight UGC-funded universities</span>
+          </div>
         </div>
       </div>
     </header>
