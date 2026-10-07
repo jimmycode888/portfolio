@@ -363,6 +363,32 @@
     .date { color: var(--muted); font-size: .9rem; }
     .role { font-weight: 800; font-size: 1.12rem; }
     .org { color: var(--accent); font-weight: 700; margin: 3px 0 12px; }
+    /* Ongoing entries: a scannable pill plus an explicit progress note, so the
+       entry never reads as a finished result. */
+    .live {
+      display: inline-block;
+      margin-top: 7px;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+    .status {
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 11px 15px;
+      margin: 0 0 4px;
+      font-size: .91rem;
+      line-height: 1.6;
+      color: var(--body);
+    }
+    .status strong { color: var(--ink); }
 
     .contact {
       background: var(--inverse-bg);
@@ -507,10 +533,19 @@
         </div>
         <div class="timeline">
           <article class="timeline-item">
-            <div class="date">Sep 2026 – Oct 2026</div>
+            <div class="date">Sep 2026 – Oct 2026<br><span class="live">In progress</span></div>
             <div>
               <div class="role">Decision Engine &amp; GenAI Developer</div>
               <div class="org">HK Inter-University GenAI Hackathon for SDGs 2026 · Track 1: Green Transport · Cross-university team of 5</div>
+              <p class="status">
+                <strong>In progress — final results pending.</strong>
+                The hackathon runs from launch day on 19 September to the final pitch on 24 October 2026.
+                Completed so far: the decision engine, its GenAI explanation layer and anti-hallucination
+                guardrail, the four decision actions with backup-route switching conditions, and the
+                backtesting framework. The pitch deck and prototype submission falls due on 18 October,
+                with finalists announced on 22 October.
+                Final results will be reported only after the competition concludes.
+              </p>
               <ul>
                 <li>Built the decision engine of a commute-reliability assistant that turns official Hong Kong Observatory typhoon warnings into personalised departure times, route choices, and backup plans, with four decision actions — depart now, wait, reroute, hold — and a latest-switch time on every backup route.</li>
                 <li>Split the engine into a rule layer and a model layer, so deterministic service rules such as suspension thresholds and headways are computed exactly in code and only non-rule disruptions are modelled.</li>
