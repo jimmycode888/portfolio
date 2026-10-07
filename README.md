@@ -9,8 +9,10 @@ Personal portfolio / resume site. Single-page, dependency-free HTML + CSS.
 | File | Purpose |
 | --- | --- |
 | `index.html` | The entire site (markup + inline CSS + a little vanilla JS, no build step) |
-| `assets/Jimmy_Liu_CV.pdf` | The CV served by the Download CV buttons |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is, skipping Jekyll processing |
+
+There are no binary assets: the site is self-contained in `index.html` and loads no
+external files.
 
 ## Theme
 
@@ -28,11 +30,6 @@ component rules.
 
 To force a palette for testing, set `data-theme="dark"` or `data-theme="light"` on the
 `<html>` element.
-
-## Updating the CV
-
-The Download CV buttons point at `assets/Jimmy_Liu_CV.pdf`. Replace that file with a new
-export and push — the buttons pick it up automatically.
 
 ## Sections
 
