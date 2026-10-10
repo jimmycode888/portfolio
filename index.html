@@ -390,6 +390,83 @@
     }
     .status strong { color: var(--ink); }
 
+    /* Achievements: award cards carrying a rank badge and the underlying
+       leaderboard metrics, so the claim is verifiable at a glance. */
+    .award {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, box-shadow .2s ease,
+                  background-color .25s ease, border-color .25s ease;
+    }
+    .award:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .award-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+    .award h3 { margin: 0; font-size: 1.1rem; }
+    .rank {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 3px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      color: var(--accent-text);
+      border-radius: 999px;
+      padding: 4px 13px;
+      font-weight: 800;
+      font-size: .95rem;
+      line-height: 1.2;
+    }
+    .rank sup { font-size: .62em; font-weight: 800; }
+    .award .meta { margin-bottom: 12px; }
+    .award p { color: var(--body); margin: 0 0 14px; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0 0 16px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .metric .metric-k {
+      display: block;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .metric .metric-v {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.22rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .metric .metric-sub {
+      display: block;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .award-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
     .contact {
       background: var(--inverse-bg);
       color: var(--inverse-fg);
@@ -431,6 +508,12 @@
       .two, .three { grid-template-columns: 1fr; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .contact { padding: 32px 24px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .award-top { flex-direction: column; gap: 10px; }
+    }
+
+    @media (max-width: 460px) {
+      .metrics { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -448,6 +531,7 @@
       <div class="nav-right">
         <div class="nav-links">
           <a href="#about">About</a>
+          <a href="#achievements">Achievements</a>
           <a href="#experience">Experience</a>
           <a href="#ambassador">Ambassador</a>
           <a href="#projects">Projects</a>
@@ -472,29 +556,30 @@
   <main id="top">
     <header class="hero">
       <div class="container">
-        <div class="eyebrow">Social Data Science · Software · Data</div>
+        <div class="eyebrow">Social Data Science · Quantitative Research · Generative AI</div>
         <h1>Jimmy Liu</h1>
         <p>
           Bachelor of Social Data Science (Economics and Data Science) student at Lingnan University,
-          with experience spanning software engineering, data analysis, SQL databases, Java applications,
-          UI/UX prototyping, and Generative AI.
+          working across quantitative factor research, Generative AI systems, software engineering,
+          and data analysis — with two 2nd-place finishes on the live PandaAI 4th Factor Competition
+          leaderboards as an individual researcher.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#projects">View Projects</a>
-          <a class="button" href="mailto:j8514190@gmail.com">Contact Me</a>
+          <a class="button primary" href="#achievements">View Achievements</a>
+          <a class="button" href="#projects">View Projects</a>
         </div>
         <div class="hero-facts">
           <div class="hero-fact">
-            <span class="fact-k">Trade Ambassador</span>
-            <span class="fact-v">HKTDC Trade Ambassador Programme, 2026/27 Cohort</span>
-          </div>
-          <div class="hero-fact">
-            <span class="fact-k">Factor Research</span>
-            <span class="fact-v">PandaAI 4th Factor Competition — submitted and backtested</span>
+            <span class="fact-k">PandaAI Leaderboards</span>
+            <span class="fact-v">2nd place on 2 of 3 boards · 3,407.84% cumulative excess return</span>
           </div>
           <div class="hero-fact">
             <span class="fact-k">GenAI Hackathon for SDGs</span>
             <span class="fact-v">HK Inter-University GenAI Hackathon 2026 — Track 1: Green Transport</span>
+          </div>
+          <div class="hero-fact">
+            <span class="fact-k">Trade Ambassador</span>
+            <span class="fact-v">HKTDC Trade Ambassador Programme, 2026/27 Cohort</span>
           </div>
         </div>
       </div>
@@ -505,16 +590,17 @@
         <div class="section-head">
           <h2>About</h2>
           <p>
-            A technology-focused student combining software development and data skills with an academic
-            foundation in economics and data science.
+            A technology-focused student combining quantitative research and data skills with an
+            academic foundation in economics and data science.
           </p>
         </div>
         <div class="grid two">
           <article class="card">
             <h3>Focus</h3>
             <p>
-              Software engineering, data processing, relational databases, data visualization,
-              statistical analysis, and Generative AI.
+              Quantitative factor research and backtesting, Generative AI systems, software engineering,
+              relational databases, data visualization, and statistical analysis — demonstrated through
+              two 2nd-place finishes on the live PandaAI 4th Factor Competition leaderboards.
             </p>
           </article>
           <article class="card">
@@ -525,11 +611,93 @@
       </div>
     </section>
 
+    <section id="achievements">
+      <div class="container">
+        <div class="section-head">
+          <h2>Achievements</h2>
+          <p>
+            Competitive results in quantitative factor research, ranked 2nd on two of three live
+            leaderboards of the PandaAI 4th Factor Competition as an individual participant.
+          </p>
+        </div>
+        <div class="grid two">
+          <article class="award">
+            <div class="award-top">
+              <h3>Excess Return Leaderboard</h3>
+              <span class="rank">2<sup>nd</sup> Place</span>
+            </div>
+            <div class="meta">PandaAI 4th Factor Competition · Value Factor Strategy · 9 Oct 2026 standings</div>
+            <p>
+              Ranked 2nd of all participants on cumulative excess return, competing against AI Agent
+              entrants, university research groups, and corporate quantitative teams — as an individual
+              undergraduate researcher on a single Value-factor strategy.
+            </p>
+            <div class="metrics">
+              <div class="metric">
+                <span class="metric-k">Cumulative excess return</span>
+                <span class="metric-v">3,407.84%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-k">Monthly excess return</span>
+                <span class="metric-v">34.51%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-k">Annualised Sharpe</span>
+                <span class="metric-v">25.08</span>
+              </div>
+            </div>
+            <div class="skills">
+              <span class="tag">Factor Research</span>
+              <span class="tag">Alpha Modelling</span>
+              <span class="tag">Risk-Adjusted Return</span>
+            </div>
+          </article>
+
+          <article class="award">
+            <div class="award-top">
+              <h3>Factor Robustness Leaderboard</h3>
+              <span class="rank">2<sup>nd</sup> Place</span>
+            </div>
+            <div class="meta">PandaAI 4th Factor Competition · Stability Score · 9 Oct 2026 standings</div>
+            <p>
+              Ranked 2nd of all participants on factor robustness, the measure of how stable a factor's
+              performance remains across rebalancing periods — the academic criterion for whether a
+              discovered signal is genuinely persistent rather than a statistical artefact.
+            </p>
+            <div class="metrics">
+              <div class="metric">
+                <span class="metric-k">Stability score</span>
+                <span class="metric-v">25.0789</span>
+              </div>
+              <div class="metric">
+                <span class="metric-k">Max drawdown</span>
+                <span class="metric-v">0.00%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-k">Sharpe ratio</span>
+                <span class="metric-v">25.0789</span>
+              </div>
+            </div>
+            <div class="skills">
+              <span class="tag">Robustness Testing</span>
+              <span class="tag">Backtesting</span>
+              <span class="tag">Factor Stability</span>
+            </div>
+          </article>
+        </div>
+        <p class="award-note">
+          <strong>Note on scope.</strong> These are in-season standings on the competition's live
+          leaderboards, captured on 9 October 2026 during the first season (1 Sep – 30 Nov 2026).
+          Rankings are updated daily and may change. No final placement, award, or prize is claimed.
+        </p>
+      </div>
+    </section>
+
     <section id="experience">
       <div class="container">
         <div class="section-head">
           <h2>Experience</h2>
-          <p>Professional and applied experience across software engineering and data analysis.</p>
+          <p>Competitive awards, professional and applied experience, and research work.</p>
         </div>
         <div class="timeline">
           <article class="timeline-item">
@@ -609,13 +777,13 @@
       <div class="container">
         <div class="section-head">
           <h2>Selected Projects</h2>
-          <p>Projects and research demonstrating software, database, analytics, quantitative research, and interface design capabilities.</p>
+          <p>Projects and research demonstrating quantitative research, software engineering, database, analytics, and interface design capabilities.</p>
         </div>
         <div class="grid two">
           <article class="card">
             <h3>PandaAI 4th Factor Competition — Alpha Factor Research</h3>
             <div class="meta">Quantitative Research · PandaAI · 2026</div>
-            <p>Submitted alpha factors to the PandaAI 4th Factor Competition, an AI-driven quantitative research competition running on a year-round open factor pool. Factors were constructed, backtested, and iteratively refined through an AI-assisted research workflow covering factor discovery, data analysis, and performance validation.</p>
+            <p>Submitted alpha factors to the PandaAI 4th Factor Competition, an AI-driven quantitative research competition running on a year-round open factor pool. Factors were constructed, backtested, and iteratively refined through an AI-assisted research workflow covering factor discovery, data analysis, and performance validation. The submitted Value-factor strategy reached <strong>2nd place on two of three live leaderboards</strong> — Excess Return and Factor Robustness.</p>
             <div class="skills"><span class="tag">Factor Research</span><span class="tag">Backtesting</span><span class="tag">AI-Assisted Research</span></div>
           </article>
 
