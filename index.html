@@ -386,6 +386,31 @@
       border-color: var(--line);
     }
 
+    /* Outbound links attached to a single timeline entry (live demo, source). */
+    .entry-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 2px;
+    }
+    .entry-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--accent-text);
+      font-size: .82rem;
+      font-weight: 700;
+      transition: border-color .2s ease, color .2s ease;
+    }
+    .entry-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     /* Achievements: award cards carrying a rank badge and the underlying
        leaderboard metrics, so the claim is verifiable at a glance. */
     .award {
@@ -720,6 +745,10 @@
             <div>
               <div class="role">Decision Engine &amp; GenAI Developer</div>
               <div class="org">HK Inter-University GenAI Hackathon for SDGs 2026 · Track 1: Green Transport · Cross-university team of 5</div>
+              <div class="entry-links">
+                <a href="https://jimmycode888.github.io/resilience-travel-assistant/" target="_blank" rel="noopener">Live demo ↗</a>
+                <a href="https://github.com/jimmycode888/resilience-travel-assistant" target="_blank" rel="noopener">Source ↗</a>
+              </div>
               <ul>
                 <li>Built the decision engine of a commute-reliability assistant that turns official Hong Kong Observatory typhoon warnings into personalised departure times, route choices, and backup plans, with four decision actions — depart now, wait, reroute, hold — and a latest-switch time on every backup route.</li>
                 <li>Split the engine into a rule layer and a model layer, so deterministic service rules such as suspension thresholds and headways are computed exactly in code and only non-rule disruptions are modelled.</li>
